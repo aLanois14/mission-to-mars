@@ -1,9 +1,10 @@
 import { Direction } from "./Direction";
 import { ModuleMartien } from "./interfaces/ModuleMartien";
+import { Volant } from "./interfaces/Volant";
 import { Position } from "./Position";
 import { Rover } from "./Rover";
 
-export class Helicoptere extends Rover implements ModuleMartien {
+export class Helicoptere extends Rover implements ModuleMartien, Volant {
   constructor(
     override readonly direction: Direction,
     override readonly position: Position
