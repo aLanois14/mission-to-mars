@@ -1,6 +1,6 @@
 import { Direction } from "../src/Direction";
 import { Helicoptere } from "../src/Helicoptere";
-import { ModuleMartien } from "../src/ModuleMartien";
+import { ModuleMartien } from "../src/interfaces/ModuleMartien";
 import { Position } from "../src/Position";
 
 describe("Hélicoptère", () => {

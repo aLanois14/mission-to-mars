@@ -1,5 +1,5 @@
 import { Direction } from "./Direction";
-import { ModuleMartien } from "./ModuleMartien";
+import { ModuleMartien } from "./interfaces/ModuleMartien";
 import { Position } from "./Position";
 import { Rover } from "./Rover";
 

@@ -1,5 +1,5 @@
 import { Helicoptere } from "./Helicoptere";
-import { ModuleMartien } from "./ModuleMartien";
+import { ModuleMartien } from "./interfaces/ModuleMartien";
 
 export class Sonde {
   preparerRecuperation(moduleMartien: ModuleMartien) {

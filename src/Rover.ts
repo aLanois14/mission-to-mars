@@ -1,5 +1,5 @@
 import { Direction } from "./Direction";
-import { ModuleMartien } from "./ModuleMartien";
+import { ModuleMartien } from "./interfaces/ModuleMartien";
 import { Position } from "./Position";
 
 export class Rover implements ModuleMartien {
@@ -13,72 +13,29 @@ export class Rover implements ModuleMartien {
   }
 
   public avancer() {
-    switch (this._direction) {
-      case Direction.NORD:
-        this._position = new Position(
-          this._position.x,
-          this._position.y + 1,
-          this._position.z
-        );
-        break;
-
-      case Direction.SUD:
-        this._position = new Position(
-          this._position.x,
-          this._position.y - 1,
-          this._position.z
-        );
-        break;
-
-      case Direction.OUEST:
-        this._position = new Position(
-          this._position.x - 1,
-          this._position.y,
-          this._position.z
-        );
-        break;
-
-      default:
-        this._position = new Position(
-          this._position.x + 1,
-          this._position.y,
-          this._position.z
-        );
-    }
+    this._deplacer(1);
   }
 
   public reculer() {
+    this._deplacer(-1);
+  }
+
+  private _deplacer(sens: number): void {
+    const { x, y, z } = this._position;
+
     switch (this._direction) {
       case Direction.NORD:
-        this._position = new Position(
-          this._position.x,
-          this._position.y - 1,
-          this._position.z
-        );
+        this._position = new Position(x, y + sens, z);
         break;
-
       case Direction.SUD:
-        this._position = new Position(
-          this._position.x,
-          this._position.y + 1,
-          this._position.z
-        );
+        this._position = new Position(x, y - sens, z);
         break;
-
       case Direction.OUEST:
-        this._position = new Position(
-          this._position.x + 1,
-          this._position.y,
-          this._position.z
-        );
+        this._position = new Position(x - sens, y, z);
         break;
-
-      default:
-        this._position = new Position(
-          this._position.x - 1,
-          this._position.y,
-          this._position.z
-        );
+      case Direction.EST:
+        this._position = new Position(x + sens, y, z);
+        break;
     }
   }
 
