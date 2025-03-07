@@ -1,24 +1,7 @@
-import { Helicoptere } from "./Helicoptere";
-import { ModuleMartien } from "./interfaces/ModuleMartien";
+import { ModuleMartien2D } from "./interfaces/ModuleMartien2D";
 
 export class Sonde {
-  preparerRecuperation(moduleMartien: ModuleMartien) {
-    if (moduleMartien instanceof Helicoptere) {
-      this.poserHelicoptere(moduleMartien);
-    }
-
+  preparerRecuperation(moduleMartien: ModuleMartien2D) {
     moduleMartien.activerRecuperation();
-  }
-
-  private poserHelicoptere(moduleMartien: ModuleMartien) {
-    const altitude: number = moduleMartien.getPosition().z;
-
-    this.atterir(moduleMartien, altitude);
-  }
-
-  private atterir(moduleMartien: ModuleMartien, altitude: number) {
-    [...Array(altitude)].forEach(() => {
-      moduleMartien.descendre();
-    });
   }
 }

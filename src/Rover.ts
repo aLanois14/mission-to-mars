@@ -1,8 +1,8 @@
 import { Direction } from "./Direction";
-import { ModuleMartien } from "./interfaces/ModuleMartien";
+import { ModuleMartien2D } from "./interfaces/ModuleMartien2D";
 import { Position } from "./Position";
 
-export class Rover implements ModuleMartien {
+export class Rover implements ModuleMartien2D {
   private pretPourRecuperation: boolean = false;
   private readonly _direction: Direction;
   protected _position: Position;
@@ -13,30 +13,11 @@ export class Rover implements ModuleMartien {
   }
 
   public avancer() {
-    this._deplacer(1);
+    this._position = this._direction.mouvement2D.avancer(this._position);
   }
 
   public reculer() {
-    this._deplacer(-1);
-  }
-
-  private _deplacer(sens: number): void {
-    const { x, y, z } = this._position;
-
-    switch (this._direction) {
-      case Direction.NORD:
-        this._position = new Position(x, y + sens, z);
-        break;
-      case Direction.SUD:
-        this._position = new Position(x, y - sens, z);
-        break;
-      case Direction.OUEST:
-        this._position = new Position(x - sens, y, z);
-        break;
-      case Direction.EST:
-        this._position = new Position(x + sens, y, z);
-        break;
-    }
+    this._position = this._direction.mouvement2D.reculer(this._position);
   }
 
   isPretPourRecuperation(): boolean {
@@ -45,14 +26,6 @@ export class Rover implements ModuleMartien {
 
   getPosition(): Position {
     return this._position;
-  }
-
-  monter() {
-    throw new Error("Un rover ne vole pas");
-  }
-
-  descendre() {
-    throw new Error("Un rover ne vole pas");
   }
 
   activerRecuperation() {

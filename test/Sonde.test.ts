@@ -1,15 +1,25 @@
 import { Direction } from "../src/Direction";
+import { Direction3D } from "../src/Direction3D";
 import { Helicoptere } from "../src/Helicoptere";
-import { ModuleMartien } from "../src/interfaces/ModuleMartien";
+import { ModuleMartien2D } from "../src/interfaces/ModuleMartien2D";
+import { Mouvement3D } from "../src/Mouvement3D";
+import { MouvementNord } from "../src/MouvementNord";
 import { Position } from "../src/Position";
 import { Rover } from "../src/Rover";
 import { Sonde } from "../src/Sonde";
 
 describe("Sonde", () => {
+  let mouvement3D;
+
+  beforeEach(() => {
+    mouvement3D = new Direction3D(new Mouvement3D());
+  });
+
   it("Le rover doit être récupéré", () => {
     // GIVEN
-    const perseverance: ModuleMartien = new Rover(
-      Direction.NORD,
+    const mouvementNord = new Direction(new MouvementNord());
+    const perseverance: ModuleMartien2D = new Rover(
+      mouvementNord,
       new Position(4, 4, 0)
     );
     const sonde: Sonde = new Sonde();
@@ -24,9 +34,11 @@ describe("Sonde", () => {
 
   it("L’hélicoptère doit être récupéré", () => {
     // GIVEN
-    const ingenuity: ModuleMartien = new Helicoptere(
-      Direction.NORD,
-      new Position(4, 4, 50)
+    const mouvementNord = new Direction(new MouvementNord());
+    const ingenuity: ModuleMartien2D = new Helicoptere(
+      mouvementNord,
+      new Position(4, 4, 50),
+      mouvement3D
     );
     const sonde: Sonde = new Sonde();
 
