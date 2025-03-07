@@ -5,6 +5,7 @@ import { ModuleMartien3D } from "../src/interfaces/ModuleMartien3D";
 import { Mouvement3D } from "../src/Mouvement3D";
 import { MouvementEst } from "../src/MouvementEst";
 import { MouvementNord } from "../src/MouvementNord";
+import { MouvementNordOuest } from "../src/MouvementNordOuest";
 import { MouvementOuest } from "../src/MouvementOuest";
 import { MouvementSud } from "../src/MouvementSud";
 import { Position } from "../src/Position";
@@ -171,5 +172,37 @@ describe("Hélicoptère", () => {
 
     // THEN
     expect(new Position(4, 4, 2)).toStrictEqual(helicoptere.getPosition());
+  });
+
+  it("Doit avancer d’une case vers le nord ouest si tourné vers le nord ouest", () => {
+    // GIVEN
+    const nordOuest = new Direction(new MouvementNordOuest());
+    const helicoptere: ModuleMartien3D = new Helicoptere(
+      nordOuest,
+      new Position(4, 4, 0),
+      mouvement3D
+    );
+
+    // WHEN
+    helicoptere.avancer();
+
+    // THEN
+    expect(new Position(3, 5, 0)).toStrictEqual(helicoptere.getPosition());
+  });
+
+  it("Doit reculer d’une case vers le nord ouest si tourné vers le sud est", () => {
+    // GIVEN
+    const nordOuest = new Direction(new MouvementNordOuest());
+    const helicoptere: ModuleMartien3D = new Helicoptere(
+      nordOuest,
+      new Position(4, 4, 0),
+      mouvement3D
+    );
+
+    // WHEN
+    helicoptere.reculer();
+
+    // THEN
+    expect(new Position(5, 3, 0)).toStrictEqual(helicoptere.getPosition());
   });
 });

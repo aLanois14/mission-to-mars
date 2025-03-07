@@ -2,6 +2,7 @@ import { Direction } from "../src/Direction";
 import { ModuleMartien2D } from "../src/interfaces/ModuleMartien2D";
 import { MouvementEst } from "../src/MouvementEst";
 import { MouvementNord } from "../src/MouvementNord";
+import { MouvementNordOuest } from "../src/MouvementNordOuest";
 import { MouvementOuest } from "../src/MouvementOuest";
 import { MouvementSud } from "../src/MouvementSud";
 import { Position } from "../src/Position";
@@ -138,5 +139,29 @@ describe("Rover", () => {
 
     // THEN
     expect(new Position(3, 4, 0)).toStrictEqual(rover.getPosition());
+  });
+
+  it("Doit avancer d’une case vers le nord ouest si tourné vers le nord ouest", () => {
+    // GIVEN
+    const nordOuest = new Direction(new MouvementNordOuest());
+    const rover: ModuleMartien2D = new Rover(nordOuest, new Position(4, 4, 0));
+
+    // WHEN
+    rover.avancer();
+
+    // THEN
+    expect(new Position(3, 5, 0)).toStrictEqual(rover.getPosition());
+  });
+
+  it("Doit reculer d’une case vers le nord ouest si tourné vers le sud est", () => {
+    // GIVEN
+    const nordOuest = new Direction(new MouvementNordOuest());
+    const rover: ModuleMartien2D = new Rover(nordOuest, new Position(4, 4, 0));
+
+    // WHEN
+    rover.reculer();
+
+    // THEN
+    expect(new Position(5, 3, 0)).toStrictEqual(rover.getPosition());
   });
 });
